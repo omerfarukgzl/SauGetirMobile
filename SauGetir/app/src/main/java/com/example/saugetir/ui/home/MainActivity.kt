@@ -30,68 +30,105 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.camasirSuyuEkle.setOnClickListener {
+            val newSayi= binding.camasirSayi.text.toString().toInt() + 1
+            binding.camasirSayi.setText((newSayi).toString())
+            calculateAmount(newSayi.toString(),binding.suSayi.text.toString(),binding.sutSayi.text.toString())
+        }
+
+        binding.suEkle.setOnClickListener {
+            val newSayi= binding.suSayi.text.toString().toInt() + 1
+            binding.suSayi.setText((newSayi).toString())
+            calculateAmount(binding.camasirSayi.text.toString(),newSayi.toString(),binding.sutSayi.text.toString())
+        }
+
+        binding.sutEkle.setOnClickListener {
+            val newSayi= binding.sutSayi.text.toString().toInt() + 1
+            binding.sutSayi.setText((newSayi).toString())
+            calculateAmount(binding.camasirSayi.text.toString(),binding.suSayi.text.toString(),newSayi.toString())
+        }
+
+        binding.saupayOde.setOnClickListener {
+
+            saupay_pay(binding.amountText.text.toString())
+        }
+
+
+    }
+
+    fun saupay_pay(amount : String)
+    {
         try {
             var encryptedTokenRequest = EncryptedTokenRequest()
 
             val paramObject = JSONObject()
-            paramObject.put("amount", "100.00")
+            paramObject.put("amount", amount)
             paramObject.put("merchantCode", MERCHANT_CODE)
 
             encryptedTokenRequest.data = EncryptionUtil.encrypt(paramObject.toString())
 
 
             val repository = TransactionRepository(RetrofitClient.getToken())
+            val call = repository.requestInitToken(encryptedTokenRequest)
 
-            binding.button.setOnClickListener {
+            call.enqueue(object : Callback<TokenResponse> {
+                //onResponse fonksiyonu, sunucudan dönen cevabı işlemek için kullanılır.
+                override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
+                    Log.d("MainActivity", response.body().toString())
+                    if (response.isSuccessful) {
 
-                val call = repository.requestInitToken(encryptedTokenRequest)
-
-                call.enqueue(object : Callback<TokenResponse> {
-                    //onResponse fonksiyonu, sunucudan dönen cevabı işlemek için kullanılır.
-                    override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                         Log.d("MainActivity", response.body().toString())
-                        if (response.isSuccessful) {
-
-                            Log.d("MainActivity", response.body().toString())
-                            Log.d("MainActivity", "istek geldi ve başarılı !!!")
-                            if (response.body()!= null){
-                                Log.d("MainActivity", "isSuccessful")
-                                val tokenResponse = response.body()
-                                Log.d("MainActivity", "Payment Token Response: -->" +tokenResponse!!.token.toString())
-                                val deepLinkUrl = "http://www.saupay5454.com/payment?token=" + tokenResponse!!.token.toString();
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deepLinkUrl))
-                                startActivity(intent)
-                            }
-
-                        }
-                        else {
-                            val errorBody = response.errorBody()?.string()
-
-                            val gson = Gson()
-                            val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
-
-                            val transactionResponse = errorResponse.status?.errorDescription
-                            // Burada, errorResponse özel hata cevabını içerecektir.
-
-                            Log.d("MainActivity",errorBody.toString())
-                            Log.d("MainActivity", "isn't Successful")
-                            Log.d("MainActivity", transactionResponse.toString())
-                            // binding.errorMaessage.text = transactionResponse.toString()
+                        Log.d("MainActivity", "istek geldi ve başarılı !!!")
+                        if (response.body()!= null){
+                            Log.d("MainActivity", "isSuccessful")
+                            val tokenResponse = response.body()
+                            Log.d("MainActivity", "Payment Token Response: -->" +tokenResponse!!.token.toString())
+                            val deepLinkUrl = "http://www.saupay5454.com/payment?token=" + tokenResponse!!.token.toString();
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deepLinkUrl))
+                            startActivity(intent)
                         }
 
                     }
-                    // onFailure fonksiyonu, sunucuya istek gönderirken bir hata oluşması durumunda çalışır.
-                    override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
-                        Log.e("MainActivityError", t.toString()!!)
+                    else {
+                        val errorBody = response.errorBody()?.string()
+
+                        val gson = Gson()
+                        val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+
+                        val transactionResponse = errorResponse.status?.errorDescription
+                        // Burada, errorResponse özel hata cevabını içerecektir.
+
+                        Log.d("MainActivity",errorBody.toString())
+                        Log.d("MainActivity", "isn't Successful")
+                        Log.d("MainActivity", transactionResponse.toString())
+                        // binding.errorMaessage.text = transactionResponse.toString()
                     }
-                })
-            }
+
+                }
+                // onFailure fonksiyonu, sunucuya istek gönderirken bir hata oluşması durumunda çalışır.
+                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+                    Log.e("MainActivityError", t.toString()!!)
+                }
+            })
+
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
     }
 
+    fun calculateAmount(camasirSayi: String, suSayi: String, sutSayi: String): String {
+        var camasirSayi = camasirSayi.toInt()
+        var suSayi = suSayi.toInt()
+        var sutSayi = sutSayi.toInt()
+        var amount = ((camasirSayi *  (binding.camasirAmount.text.toString().split(".")[0].toInt())) +
+                (suSayi * (binding.suAmount.text.toString().split(".")[0].toInt()))+
+                (sutSayi * (binding.sutAmount.text.toString().split(".")[0].toInt())))
+
+        binding.araToplam.text = amount.toString() + ".00" + " TL"
+        binding.amountText.text = (amount.toString().toInt() - 5).toString() + ".00" + " TL"
+        return amount.toString()
+    }
 
 
 
