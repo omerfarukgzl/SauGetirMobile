@@ -321,14 +321,27 @@
 
     <TextView
         android:id="@+id/amountText"
-        android:layout_width="87dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="59dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
         android:background="#C61477"
-        android:text="67.00  TL"
+        android:text="67.00"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/tlText"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:background="#C61477"
+        android:text="TL"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 

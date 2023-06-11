@@ -19,6 +19,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.math.BigDecimal
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,13 +51,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.saupayOde.setOnClickListener {
 
-            saupay_pay(binding.amountText.text.toString())
+            saupay_pay(binding.amountText.text.toString().toBigDecimal())
         }
 
 
     }
 
-    fun saupay_pay(amount : String)
+    fun saupay_pay(amount : BigDecimal)
     {
         try {
             var encryptedTokenRequest = EncryptedTokenRequest()
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                 (sutSayi * (binding.sutAmount.text.toString().split(".")[0].toInt())))
 
         binding.araToplam.text = amount.toString() + ".00" + " TL"
-        binding.amountText.text = (amount.toString().toInt() - 5).toString() + ".00" + " TL"
+        binding.amountText.text = (amount.toString().toInt() - 5).toString() + ".00"
         return amount.toString()
     }
 
