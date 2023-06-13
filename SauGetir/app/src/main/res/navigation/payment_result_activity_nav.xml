@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_result_activity_nav"
+    app:startDestination="@id/resultFragment">
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.saugetir.ui.paymentresult.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_paymentCompletedResultFragment"
+            app:destination="@id/paymentCompletedResultFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_paymentResultNotCompletedFragment"
+            app:destination="@id/paymentResultNotCompletedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentCompletedResultFragment"
+        android:name="com.example.saugetir.ui.paymentresult.PaymentResultCompletedFragment"
+        android:label="fragment_payment_completed_result"
+        tools:layout="@layout/fragment_payment_completed_result" >
+        <action
+            android:id="@+id/action_paymentCompletedResultFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentResultNotCompletedFragment"
+        android:name="com.example.saugetir.ui.paymentresult.PaymentResultNotCompletedFragment"
+        android:label="fragment_payment_result_not_completed"
+        tools:layout="@layout/fragment_payment_result_not_completed" >
+        <action
+            android:id="@+id/action_paymentResultNotCompletedFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.saugetir.ui.home.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>

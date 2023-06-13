@@ -13,16 +13,19 @@
         android:background="#EDEDED"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="362dp"
         android:layout_height="87dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -40,7 +43,7 @@
         android:id="@+id/saupayOde"
         android:layout_width="319dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#C61477"
         android:text="SauPay İle Öde"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,10 +54,11 @@
         android:id="@+id/button2"
         android:layout_width="256dp"
         android:layout_height="51dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#8B108F"
         android:text="Ödemeyi Tamamla"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -178,9 +182,10 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
 
@@ -188,10 +193,11 @@
         android:id="@+id/divider4"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountText" />
 
@@ -351,13 +357,13 @@
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:background="#C61477"
+        android:clickable="true"
         android:text="Ekle"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/view2"
-        android:clickable="true"/>
+        app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
         android:id="@+id/sutEkle"
@@ -365,15 +371,14 @@
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:background="#C61477"
+        android:clickable="true"
         android:text="Ekle"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        android:clickable="true"
-        />
+        app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <TextView
         android:id="@+id/suEkle"
@@ -381,13 +386,13 @@
         android:layout_height="25dp"
         android:layout_marginTop="12dp"
         android:background="#C61477"
+        android:clickable="true"
         android:text="Ekle"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/view4"
-        android:clickable="true"/>
+        app:layout_constraintTop_toTopOf="@+id/view4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

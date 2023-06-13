@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.saupayOde.setOnClickListener {
-
+            Log.d("amount", binding.amountText.text.toString())
             saupay_pay(binding.amountText.text.toString().toBigDecimal())
         }
 
